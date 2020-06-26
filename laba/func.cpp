@@ -34,7 +34,7 @@ ostream& operator<<(ostream &out, const goods a){
 }
 
 
-ofstream get_newfile(char* TVfn, char* Fridgefn, char* Microwavefn, int type){                                 //возвращает файл на дефолтный аутпут
+ofstream get_newfile(char* TVfn, char* Fridgefn, char* Microwavefn, int type){
     ofstream f;
 
     switch (type){
@@ -47,7 +47,7 @@ ofstream get_newfile(char* TVfn, char* Fridgefn, char* Microwavefn, int type){  
     else _2012();
 }
 
-ifstream get_infile(char* TVfn, char* Fridgefn, char* Microwavefn, int type){                                //возвращает файл на считывание товаров
+ifstream get_infile(char* TVfn, char* Fridgefn, char* Microwavefn, int type){
     ifstream f;
 
     switch (type){
@@ -60,13 +60,13 @@ ifstream get_infile(char* TVfn, char* Fridgefn, char* Microwavefn, int type){   
 
 }
 
-void get_name(char* str){                                     //get_name
+void get_name(char* str){
     cout << "Vvedite nazvanie: ";
     cin >> str;
 }
 
-void get_param(int* par, int* new_par,int type){                       //Функция для функции change, чтобы узнать параметр, который
-    cout << "4to izmenit? Cena - 1, ";                                 //надо изменить и новое значение
+void get_param(int* par, int* new_par,int type){
+    cout << "4to izmenit? Cena - 1, ";
     if (type == 1) cout << "diagonal - 2: ";
     else if (type == 2 || type == 3) cout << "Vmestimost - 2: ";
     cin >> *par;
@@ -74,7 +74,7 @@ void get_param(int* par, int* new_par,int type){                       //Фун�
     cin >> *new_par;
 }
 
-void load_data(char* TVfn, char* Fridgefn, char* Microwavefn, int len, int type, goods* a){                           //Загружает всю инфу в файл
+void load_data(char* TVfn, char* Fridgefn, char* Microwavefn, int len, int type, goods* a){
     int i = 0;
     ofstream to_load = get_newfile(TVfn, Fridgefn, Microwavefn, type);
     to_load << len;
@@ -88,9 +88,9 @@ void get_type(int* type){                                                //Сч�
     while (cin >> *type && (*type < 1 || *type > 3)) cout << "Neverniy type! Davay ewe raz! ";
 }
 
-void add(char* TVfn, char* Fridgefn, char* Microwavefn){                                              //добавляет товар в файл, путем считывания первого элемента - кол-ва товара
-                                                         //в файле, считыванием товаров в массив с последующим выгрузом кол-ва товара
-    int type;                                            //и товара
+void add(char* TVfn, char* Fridgefn, char* Microwavefn){
+
+    int type;
     get_type(&type);
     ifstream to_read = get_infile(TVfn, Fridgefn, Microwavefn, type);
     int len = 0, i = 0;
@@ -108,10 +108,10 @@ void add(char* TVfn, char* Fridgefn, char* Microwavefn){                        
 }
 
 
-void change(char* TVfn, char* Fridgefn, char* Microwavefn){                                         //Изменяет параметры товара по названию и типу, путем полного считывания и обратной загрузки,
-                                                       //токо во время считывания в массив, в зависимости от совпадений
-    int type;                                          //названий товаров в файле и названия введенного пользователем -
-    get_type(&type);                                   //менять введенные параметры.
+void change(char* TVfn, char* Fridgefn, char* Microwavefn){
+
+    int type;
+    get_type(&type);
     char name[50];
     get_name(name);
     int par, new_par;
@@ -134,12 +134,11 @@ void change(char* TVfn, char* Fridgefn, char* Microwavefn){                     
     load_data(TVfn, Fridgefn, Microwavefn, len, type, a);
 
     cout << "Parametr uspeshno izmenen!\n";
-
 }
 
 
-void dell(char* TVfn, char* Fridgefn, char* Microwavefn){                                          //Удалить товар в зависимости в навания и типа, введенных пользователем
-                                                      //путем полного считывания и обратной загрузки
+void dell(char* TVfn, char* Fridgefn, char* Microwavefn){
+
     int type, len, i = -1, m;;
     get_type(&type);
     char name[50];
@@ -162,14 +161,14 @@ void dell(char* TVfn, char* Fridgefn, char* Microwavefn){                       
 }
 
 
-void show_params(goods a){                                               //show_params
+void show_params(goods a){
     cout << "Cena " << a.price << endl;
     if (a.diagonal) cout << "Diagonal " << a.diagonal << endl;
     if (a.capacity) cout << "Vmestimost " << a.capacity << endl;
 }
 
-void seek(char* TVfn, char* Fridgefn, char* Microwavefn){                                    //Поиск товара по типу файла и названия товара, путем считывания из файла
-                                                //в массив с параллельным подсчетом кол-ва этого товара
+void seek(char* TVfn, char* Fridgefn, char* Microwavefn){
+
     int type;
     get_type(&type);
     char name[50];
